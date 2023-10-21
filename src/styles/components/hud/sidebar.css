@@ -1,0 +1,132 @@
+.sidebar {
+   border-right: 0.1rem solid var(--border-color);
+}
+
+.sidebar-links {
+   display: flex;
+   flex-direction: column;
+}
+
+.sidebar-link {
+   display: flex;
+   flex-direction: column;
+}
+
+.sidebar-link:not(:last-child) {
+   position: relative;
+   
+   border-bottom: 0.1rem solid transparent;
+}
+
+.sidebar-link:not(:last-child, :hover)::before {
+   content: '';
+
+   position: absolute;
+   bottom: -0.1rem;
+   left: 4%;
+   
+   width: 92%;
+   
+   border-bottom: 0.1rem solid var(--border-color);
+}
+
+.sidebar-link-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+   padding: 1rem 1.5rem;
+
+   transition: background-color 0.2s ease;
+}
+
+.sidebar-link-header:hover,
+.sidebar-link.open .sidebar-link-header {
+   background-color: var(--light-main);
+
+   cursor: pointer;
+}
+
+.sidebar-link-header > svg {
+   font-size: 1.4rem;
+
+   transition: transform 0.2s ease;
+}
+
+.sidebar-link.open .sidebar-link-header > svg {
+   transform: rotate(180deg);
+}
+
+.sidebar-link-options {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: 0fr;
+
+   transition: grid-template-rows 0.2s ease;
+}
+
+.sidebar-link-options ul {
+   overflow: hidden;
+}
+
+.sidebar-link.open .sidebar-link-options {
+   grid-template-rows: 1fr;
+
+   background-color: var(--dark-main);
+}
+
+.sidebar-link-option {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+   padding: 0 2rem;
+
+   transition: padding 0.2s ease, background-color 0.2s ease;
+}
+
+.sidebar-link-option:hover {
+   cursor: pointer;
+
+   background-color: var(--lighter-main);
+}
+
+.sidebar-link.open .sidebar-link-option {
+   padding: 0.5rem 2rem;
+}
+
+.sidebar-link-option > svg {
+   font-size: 1.2rem;
+}
+
+.sidebar-button {
+   width: 80%;
+   margin: 2rem auto 0;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+
+   padding: 1rem 1.5rem;
+
+   color: var(--secondary);
+   background-color: var(--light-main);
+
+   border-radius: 0.3rem;
+
+   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-button:hover {
+   cursor: pointer;
+
+   color: var(--main);
+   background-color: var(--secondary);
+}
+
+.sidebar-button > svg {
+   font-size: 1.4rem;
+
+   margin-bottom: 0.25rem;
+}

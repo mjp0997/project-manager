@@ -1,0 +1,22 @@
+:root {
+   /* Colors */
+   --main: #1D2125;
+   --dark-main: #171A1E;
+   --darker-main: #101204;
+   --light-main: #333C43;
+   --lighter-main: #A6C5E229;
+   
+   --secondary: #9FADBC;
+   --light-secondary: #B6C2CF;
+
+   --border-color: #9fadbc29;
+
+   --success: #4BCE97;
+   --info: #579DFF;
+
+   /* Fonts */
+   --main-font: 'Rubik', sans-serif;
+
+   /* Z index */
+   --modal-index: 10;
+}

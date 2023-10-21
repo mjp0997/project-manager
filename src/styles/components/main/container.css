@@ -1,0 +1,45 @@
+.main-container {
+   display: flex;
+
+   backdrop-filter: contrast(0.95);
+
+   height: 100%;
+   max-height: 100%;
+}
+
+.main {
+   display: flex;
+   flex-direction: column;
+   margin: 1rem;
+   padding: 1rem;
+
+   width: 100%;
+
+   overflow: auto;
+}
+
+.main::-webkit-scrollbar {
+   width: 1rem;
+   height: 1rem;
+}
+
+/* Track */
+.main::-webkit-scrollbar-track {
+   background: rgba(0, 0, 0, 0.1);
+
+   border-radius: 0.3rem;
+}
+
+/* Handle */
+.main::-webkit-scrollbar-thumb {
+   background: hsla(0, 0%, 100%, 0.3);
+
+   border-radius: 0.3rem;
+}
+
+.main-content {
+   display: flex;
+   flex-direction: column;
+
+   width: 100%;
+}

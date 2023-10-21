@@ -1,0 +1,48 @@
+html {
+   box-sizing: border-box;
+
+   scroll-behavior: smooth;
+
+   /* 1rem = 10px */
+   font-size: 62.5%;
+}
+
+*, *:before, *:after {
+   box-sizing: inherit;
+
+   margin: 0;
+   padding: 0;
+
+   text-decoration: none;
+
+   color: inherit;
+
+   outline: none;
+   border: none;
+}
+
+body {
+   font-size: 1.6rem;
+
+   font-family: var(--main-font);
+
+   scroll-behavior: smooth;
+
+   cursor: default;
+
+   color: var(--light-secondary);
+
+   background-color: var(--main);
+}
+
+input:focus {
+   outline: none;
+}
+
+ul, ol {
+   list-style: none;
+}
+
+button {
+   background-color: transparent;
+}
