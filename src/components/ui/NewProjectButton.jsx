@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -8,17 +8,40 @@ import Icon from '@/components/ui/Icon';
 
 
 
+// Services
+import { createProject } from '@/services/projects';
+
+
+
+// Custom hooks
+import { useGetProjects } from '@/hooks/services/useProjects';
+
+
+
 const NewProjectButton = ({className}) => {
 
+   const navigate = useNavigate();
+
+   const { dispatchProjects } = useGetProjects();
+
+   const handleCreate = async () => {
+      const projectId = await createProject();
+
+      dispatchProjects();
+
+      navigate(`/projects/${projectId}`);
+   }
+
    return (
-      <Link
+      <button
          className={className}
-         to='/project/new'
+         type='button'
+         onClick={handleCreate}
       >
          <Icon icon='faPlus' />
 
          <p>New project</p>
-      </Link>
+      </button>
    );
 }
 

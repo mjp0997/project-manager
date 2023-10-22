@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
 
@@ -6,15 +8,28 @@ import { contrastColor } from '@/helpers/colors';
 
 
 
-const ProjectElement = () => {
+const ProjectElement = ({id, name, boardsCount, color}) => {
 
    return (
-      <div className='project' style={{ color: contrastColor('#FF0000'), backgroundColor: '#FF0000'}}>
-         <h4 className='project-name'>Mi proyecto</h4>
+      <Link
+         className='project'
+         style={{ color: contrastColor(color), backgroundColor: color}}
+         to={`/projects/${id}`}
+      >
+         <h4 className='project-name'>{name}</h4>
 
-         <p className='project-data'>Boards: <span>5</span></p>
-      </div>
+         <p className='project-data'>Boards: <span>{boardsCount}</span></p>
+      </Link>
    );
+}
+
+
+
+ProjectElement.propTypes = {
+   id: PropTypes.number.isRequired,
+   name: PropTypes.string.isRequired,
+   boardsCount: PropTypes.number.isRequired,
+   color: PropTypes.string.isRequired,
 }
 
 

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 
@@ -14,6 +15,11 @@ import Project from '@/views/Project';
 
 
 
+// Custom hooks
+import { useGetProjects } from '@/hooks/services/useProjects';
+
+
+
 const router = createBrowserRouter([
    {
       element: <MainLayout />,
@@ -23,11 +29,11 @@ const router = createBrowserRouter([
             element: <Main />,
          },
          {
-            path: '/project/:projectId',
+            path: '/projects/:projectId',
             element: <Project />,
          },
          {
-            path: '/project/:projectId/:boardId',
+            path: '/projects/:projectId/:boardId',
             element: <Board />,
          },
       ]
@@ -37,6 +43,12 @@ const router = createBrowserRouter([
 
 
 const MainRouter = () => {
+
+   const { dispatchProjects } = useGetProjects();
+
+   useEffect(() => {
+      dispatchProjects();
+   }, []);
 
    return (
       <RouterProvider router={router} />

@@ -2,8 +2,22 @@
 
 
 /**
- * Función para contrastar el color dado por parámetros
- * @param {string} hex Color hexadecimal, con o sin el #
+ * Function to generate a random dark hex color
+ * @returns {string} random dark hex color
+ */
+export const randomHexColor = () => {
+   let color = '#';
+
+   for (let i = 0; i < 6; i++) {
+      color += Math.floor(Math.random() * 8);
+   }
+
+   return color;
+}
+
+/**
+ * Function to contrast the given color
+ * @param {string} hex hexadecimal color
  * @returns {string}
  */
 export const contrastColor = (hex) => {

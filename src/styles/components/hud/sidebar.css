@@ -47,6 +47,10 @@
    cursor: pointer;
 }
 
+.sidebar-link-header > a {
+   flex-grow: 1;
+}
+
 .sidebar-link-header > svg {
    font-size: 1.4rem;
 

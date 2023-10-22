@@ -2,7 +2,7 @@
 
 
 export const types = {
-   HANDLE_MODAL: '[ui] HANDLE MODAL STATE'
+   HANDLE_MODAL: '[UI] HANDLE MODAL STATE'
 }
 
 

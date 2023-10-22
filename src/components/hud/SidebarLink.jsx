@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
 
@@ -7,7 +9,7 @@ import Icon from '@/components/ui/Icon';
 
 
 
-const SidebarLink = () => {
+const SidebarLink = ({id, name, boards}) => {
    
    const [isOpen, setIsOpen] = useState(false);
 
@@ -16,28 +18,42 @@ const SidebarLink = () => {
    return (
       <li className={handleClassName('sidebar-link')}>
          <div className='sidebar-link-header'>
-            <p>Proyecto</p>
+            <Link to={`/projects/${id}`}>{name}</Link>
 
             <Icon icon='faChevronDown' onClick={() => setIsOpen(current => !current)} />
          </div>
 
          <div className='sidebar-link-options'>
             <ul>
-               <li className='sidebar-link-option'>
-                  <p>Tablero</p>
+               {
+                  boards.map(board => (
+                     <Link
+                        key={`board-sidebar-${board.id}`}
+                        className='sidebar-link-option'
+                        to={`/projects/${id}/${board.id}`}
+                     >
+                        <p>{board.name}</p>
 
-                  <Icon icon='faChevronRight' />
-               </li>
+                        <Icon icon='faChevronRight' />
+                     </Link>
+                  ))
+               }
                
-               <li className='sidebar-link-option'>
-                  <p>Tablero</p>
-
-                  <Icon icon='faChevronRight' />
-               </li>
             </ul>
          </div>
       </li>
    );
+}
+
+
+
+SidebarLink.propTypes = {
+   id: PropTypes.number.isRequired,
+   name: PropTypes.string.isRequired,
+   boards: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+   })).isRequired,
 }
 
 

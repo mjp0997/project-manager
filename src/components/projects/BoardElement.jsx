@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 
 
 
@@ -6,16 +7,25 @@ import { contrastColor } from '@/helpers/colors';
 
 
 
-const BoardElement = () => {
+const BoardElement = ({name, color, listsCount, tasksCount}) => {
 
    return (
-      <div className='board' style={{ color: contrastColor('#FF0000'), backgroundColor: '#FF0000'}}>
-         <h4 className='boards-name'>My board</h4>
+      <div className='board' style={{ color: contrastColor(color), backgroundColor: color}}>
+         <h4 className='boards-name'>{name}</h4>
 
-         <p className='boards-data'>Lists: <span>3</span></p>
-         <p className='boards-data'>Tasks: <span>5</span></p>
+         <p className='boards-data'>Lists: <span>{listsCount}</span></p>
+         <p className='boards-data'>Tasks: <span>{tasksCount}</span></p>
       </div>
    );
+}
+
+
+
+BoardElement.propTypes = {
+   name: PropTypes.string.isRequired,
+   color: PropTypes.string.isRequired,
+   listsCount: PropTypes.number.isRequired,
+   tasksCount: PropTypes.number.isRequired,
 }
 
 

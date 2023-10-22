@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -8,24 +7,43 @@ import Icon from '@/components/ui/Icon';
 
 
 
-const NewBoardButton = ({projectId}) => {
+// Services
+import { createBoard } from '@/services/boards';
+
+
+
+// Custom hooks
+import { useGetProjects } from '@/hooks/services/useProjects';
+
+
+
+const NewBoardButton = () => {
+
+   const navigate = useNavigate();
+
+   const { projectId } = useParams();
+
+   const { dispatchProjects } = useGetProjects();
+
+   const handleCreate = async () => {
+      const boardId = await createBoard(Number(projectId));
+
+      dispatchProjects();
+
+      navigate(`/projects/${projectId}/${boardId}`);
+   }
 
    return (
-      <Link
+      <button
          className='board button'
-         to={`/project/${projectId}/new`}
+         type='button'
+         onClick={handleCreate}
       >
          <Icon icon='faPlus' />
 
          <p>New board</p>
-      </Link>
+      </button>
    );
-}
-
-
-
-NewBoardButton.propTypes = {
-   projectId: PropTypes.number.isRequired,
 }
 
 
