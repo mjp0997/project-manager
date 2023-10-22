@@ -1,0 +1,50 @@
+.project-container {
+   flex-grow: 1;
+
+   display: flex;
+   flex-direction: column;
+
+   width: 100%;
+}
+
+.project-header {
+   width: 100%;
+   height: 7rem;
+   
+   padding: 2rem;
+
+   display: flex;
+   align-items: center;
+
+   background-color: rgba(0, 0, 0, 0.25);
+}
+
+.project-title {
+   font-size: 2rem;
+   font-weight: 700;
+
+   background-color: transparent;
+
+   padding: 0.5rem;
+
+   border: 0.2rem solid transparent;
+   border-radius: 0.4rem;
+
+   cursor: pointer;
+
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+
+   transition: border-color 0.2s ease;
+}
+
+.project-title:focus {
+   border-color: var(--info);
+
+   cursor: text;
+}
+
+.project-body {
+   flex-grow: 1;
+}

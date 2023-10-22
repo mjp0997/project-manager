@@ -15,72 +15,8 @@ const Main = () => {
          <Body>
             <div className='projects-container'>
                <div className='projects'>
+                  <h3 className='projects-title'>My projects</h3>
 
-               <h3 className='projects-title'>My projects</h3>
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-
-                  <NewProjectButton className='project button' />
-               </div>
-            </div>
-            <div className='projects-container'>
-               <div className='projects'>
-
-               <h3 className='projects-title'>My projects</h3>
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-
-                  <NewProjectButton className='project button' />
-               </div>
-            </div>
-            <div className='projects-container'>
-               <div className='projects'>
-
-               <h3 className='projects-title'>My projects</h3>
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-
-                  <NewProjectButton className='project button' />
-               </div>
-            </div>
-            <div className='projects-container'>
-               <div className='projects'>
-
-               <h3 className='projects-title'>My projects</h3>
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-                  <ProjectElement />
-
-                  <NewProjectButton className='project button' />
-               </div>
-            </div>
-            <div className='projects-container'>
-               <div className='projects'>
-
-               <h3 className='projects-title'>My projects</h3>
                   <ProjectElement />
                   <ProjectElement />
                   <ProjectElement />

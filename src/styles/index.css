@@ -25,5 +25,8 @@
 @import url('./components/main/index.css');
 
 /* Project */
+@import url('./components/projects/index.css');
 
-@import url('./components/project/index.css');
+/* Board */
+
+@import url('./components/boards/index.css');

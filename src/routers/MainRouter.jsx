@@ -2,10 +2,15 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 
 
+// Layouts
+import MainLayout from '@/layouts/MainLayout';
+
+
+
 // Views
 import Main from '@/views/Main';
+import Board from '@/views/Board';
 import Project from '@/views/Project';
-import MainLayout from '@/layouts/MainLayout';
 
 
 
@@ -18,8 +23,12 @@ const router = createBrowserRouter([
             element: <Main />,
          },
          {
-            path: '/project/:id',
+            path: '/project/:projectId',
             element: <Project />,
+         },
+         {
+            path: '/project/:projectId/:boardId',
+            element: <Board />,
          },
       ]
    }

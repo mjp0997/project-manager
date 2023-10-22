@@ -11,40 +11,40 @@ const List = () => {
    return (
       <li className='list'>
          <div className='list-header'>
-            <h4>Task list</h4>
+            <input type='text' defaultValue='Task list' />
             
             <Icon icon='faEllipsis' />
          </div>
 
          <div className='list-body'>
             <ol className='list-content'>
-               <li className='task'>
+               <li className='task prevent-selection'>
                   <p>Task</p>
                </li>
 
-               <li className='task'>
+               <li className='task prevent-selection'>
                   <p>Task</p>
                </li>
                
-               <li className='task'>
+               <li className='task prevent-selection'>
                   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
                </li>
-               <li className='task'>
+               <li className='task prevent-selection'>
                   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
                </li>
-               <li className='task'>
+               <li className='task prevent-selection'>
                   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
                </li>
-               <li className='task'>
+               <li className='task prevent-selection'>
                   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
                </li>
-               <li className='task'>
+               <li className='task prevent-selection'>
                   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
                </li>
-               <li className='task'>
+               <li className='task prevent-selection'>
                   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
                </li>
-               <li className='task'>
+               <li className='task prevent-selection'>
                   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
                </li>
             </ol>

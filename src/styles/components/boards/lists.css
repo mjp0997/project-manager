@@ -23,15 +23,39 @@
 .list-header {
    flex-shrink: 0;
 
-   padding: 1.5rem 2rem;
+   padding: 1rem 2rem 1rem 1rem;
 
    display: flex;
    align-items: center;
    justify-content: space-between;
+   gap: 1rem;
 }
 
-.list-header > h4 {
+.list-header > input {
    font-size: 1.6rem;
+
+   flex-grow: 1;
+
+   padding: 0.5rem 1rem;
+
+   background-color: transparent;
+
+   border: 0.2rem solid transparent;
+   border-radius: 0.5rem;
+
+   cursor: pointer;
+
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+
+   transition: border-color 0.2s ease;
+}
+
+.list-header > input:focus {
+   cursor: text;
+
+   border-color: var(--info);
 }
 
 .list-header > svg {
@@ -162,6 +186,7 @@
 
    cursor: pointer;
 
+   border: 0.2rem solid transparent;
    border-radius: 0.5rem;
 
    transition: background-color 0.2s ease;
