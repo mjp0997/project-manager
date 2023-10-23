@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 // Importaciones de los reducers
 import {
+   boardsReducer,
    projectsReducer,
    uiReducer
 } from '@/reducers';
@@ -11,6 +12,7 @@ import {
 // Main reducer
 const reducers = {
    // Lista de reducers
+   boards: boardsReducer,
    projects: projectsReducer,
    ui: uiReducer,
 }

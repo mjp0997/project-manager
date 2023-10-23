@@ -1,3 +1,4 @@
+import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
@@ -7,21 +8,28 @@ import { contrastColor } from '@/helpers/colors';
 
 
 
-const BoardElement = ({name, color, listsCount, tasksCount}) => {
+const BoardElement = ({id, name, color, listsCount, tasksCount}) => {
+
+   const { projectId } = useParams();
 
    return (
-      <div className='board' style={{ color: contrastColor(color), backgroundColor: color}}>
+      <Link
+         className='board'
+         style={{ color: contrastColor(color), backgroundColor: color}}
+         to={`/projects/${projectId}/${id}`}
+      >
          <h4 className='boards-name'>{name}</h4>
 
          <p className='boards-data'>Lists: <span>{listsCount}</span></p>
          <p className='boards-data'>Tasks: <span>{tasksCount}</span></p>
-      </div>
+      </Link>
    );
 }
 
 
 
 BoardElement.propTypes = {
+   id: PropTypes.number.isRequired,
    name: PropTypes.string.isRequired,
    color: PropTypes.string.isRequired,
    listsCount: PropTypes.number.isRequired,

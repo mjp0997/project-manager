@@ -35,6 +35,7 @@ const Project = () => {
    const { getProjectById } = useGetProject();
 
    useEffect(() => {
+      dispatch(setProjectData(null));
       fetchProject(projectId);
    }, [projectId, dispatch, navigate]);
 
@@ -55,6 +56,12 @@ const Project = () => {
       return data;
    }
 
+   if (!project) {
+      return (
+         <div className='project-container'></div>
+      );
+   }
+
    return (
       <div className='project-container'>
          <ProjectHeader />
@@ -69,10 +76,11 @@ const Project = () => {
                         project?.boards?.map(board => (
                            <BoardElement
                               key={`board-${board.id}`}
+                              id={board.id}
                               name={board.name}
                               color={board.color}
                               listsCount={board.lists.length}
-                              tasksCount={board.lists.reduce((el, acc) => acc + el.tasks.length, 0)}
+                              tasksCount={board.lists.reduce((acc, el) => acc + el.tasks.length, 0)}
                            />
                         ))
                      }

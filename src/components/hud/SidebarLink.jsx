@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
@@ -10,8 +10,18 @@ import Icon from '@/components/ui/Icon';
 
 
 const SidebarLink = ({id, name, boards}) => {
+
+   const { projectId } = useParams();
    
    const [isOpen, setIsOpen] = useState(false);
+
+   useEffect(() => {
+      if (Number(projectId) === id) {
+         setIsOpen(true);
+      } else {
+         setIsOpen(false);
+      }
+   }, [projectId, id]);
 
    const handleClassName = (className) => isOpen ? `${className} open` : className;
 
@@ -27,7 +37,7 @@ const SidebarLink = ({id, name, boards}) => {
             <ul>
                {
                   boards.map(board => (
-                     <Link
+                     <NavLink
                         key={`board-sidebar-${board.id}`}
                         className='sidebar-link-option'
                         to={`/projects/${id}/${board.id}`}
@@ -35,7 +45,7 @@ const SidebarLink = ({id, name, boards}) => {
                         <p>{board.name}</p>
 
                         <Icon icon='faChevronRight' />
-                     </Link>
+                     </NavLink>
                   ))
                }
                

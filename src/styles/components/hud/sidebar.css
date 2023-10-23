@@ -89,10 +89,14 @@
    transition: padding 0.2s ease, background-color 0.2s ease;
 }
 
-.sidebar-link-option:hover {
+.sidebar-link-option:not(.active):hover {
    cursor: pointer;
 
    background-color: var(--lighter-main);
+}
+
+.sidebar-link-option.active {
+   background-color: var(--info);
 }
 
 .sidebar-link.open .sidebar-link-option {

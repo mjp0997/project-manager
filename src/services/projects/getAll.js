@@ -7,8 +7,9 @@ import { projects } from '@/helpers/localStorage';
  * @returns {Promise<array<{
  *    id: number,
  *    name: string,
+ *    color: string,
  *    boards: array
- * }>>} project id
+ * }>>} projects
  */
 export const getAll = async () => {
    const projectsList = await projects.getAllLocalProjects();

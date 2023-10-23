@@ -1,3 +1,11 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+
+
+
+// Actions
+import { setBoardData } from '@/actions/boards';
 
 
 
@@ -9,7 +17,50 @@ import Body from '@/components/ui/Body';
 
 
 
+// Custom hooks
+import { useGetBoard } from '@/hooks/services/useBoards';
+
+
+
 const Board = () => {
+
+   const dispatch = useDispatch();
+
+   const navigate = useNavigate();
+
+   const { projectId, boardId } = useParams();
+
+   const { board } = useSelector(state => state.boards);
+
+   const { getBoardById } = useGetBoard();
+
+   useEffect(() => {
+      dispatch(setBoardData(null));
+      fetchProject(projectId, boardId);
+   }, [projectId, boardId, dispatch, navigate]);
+
+   useEffect(() => {
+      return () => {
+         dispatch(setBoardData(null));
+      }
+   }, [dispatch]);
+
+   const fetchProject = async (projectId, boardId) => {
+      const data = await getBoardById(Number(projectId), Number(boardId));
+
+      if (!data) {
+         navigate('/');
+         return null;
+      }
+
+      return data;
+   }
+
+   if (!board) {
+      return (
+         <div className='board-container'></div>
+      );
+   }
 
    return (
       <div className='board-container'>
@@ -18,13 +69,17 @@ const Board = () => {
          <div className='board-body'>
             <Body>
                <ol className='lists-container'>
-                  <List />
-                  <List />
-                  <List />
-                  <List />
-                  <List />
-                  <List />
-                  <List />
+                  {
+                     board?.lists?.map(list => (
+                        <List
+                           key={`list-${list.id}`}
+                           id={list.id}
+                           name={list.name}
+                           tasks={list.tasks}
+                        />
+                     ))
+                  }
+                  
                   <NewListButton />
                </ol>
             </Body>

@@ -1,64 +1,50 @@
+import PropTypes from 'prop-types';
 
 
 
 // Components
-import Icon from '@/components/ui/Icon';
+import NewTaskButton from '@/components/board/NewTaskButton';
+import ListHeader from '@/components/board/ListHeader';
 
 
 
-const List = () => {
+const List = ({id, name, tasks}) => {
 
    return (
       <li className='list'>
-         <div className='list-header'>
-            <input type='text' defaultValue='Task list' />
-            
-            <Icon icon='faEllipsis' />
-         </div>
+         <ListHeader id={id} name={name} />
 
          <div className='list-body'>
             <ol className='list-content'>
-               <li className='task prevent-selection'>
-                  <p>Task</p>
-               </li>
-
-               <li className='task prevent-selection'>
-                  <p>Task</p>
-               </li>
-               
-               <li className='task prevent-selection'>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
-               </li>
-               <li className='task prevent-selection'>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
-               </li>
-               <li className='task prevent-selection'>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
-               </li>
-               <li className='task prevent-selection'>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
-               </li>
-               <li className='task prevent-selection'>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
-               </li>
-               <li className='task prevent-selection'>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
-               </li>
-               <li className='task prevent-selection'>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati ex voluptates nesciunt exercitationem culpa eos expedita molestias incidunt quia in. Ullam, nemo sapiente dolore similique sit fugit blanditiis assumenda labore!</p>
-               </li>
+               {
+                  tasks.map(task => (
+                     <li
+                        key={`task-${task.id}`}
+                        className='task prevent-selection'
+                     >
+                        <p>{task.text}</p>
+                     </li>
+                  ))
+               }
             </ol>
          </div>
 
          <div className='list-footer'>
-            <button type='button' className='list-footer-button'>
-               <Icon icon='faPlus' />
-
-               <p>New task</p>
-            </button>
+            <NewTaskButton listId={id} />
          </div>
       </li>
    );
+}
+
+
+
+List.propTypes = {
+   id: PropTypes.number.isRequired,
+   name: PropTypes.string.isRequired,
+   tasks: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired
+   })).isRequired
 }
 
 
