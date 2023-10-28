@@ -110,7 +110,26 @@
    transition: background-color 0.2s ease;
 }
 
-.task:hover {
+.task.drop-zone {
+   display: flex;
+   justify-content: center;
+
+   padding: 0.8rem 1.3rem;
+
+   border: 0.2rem solid var(--secondary);
+   
+   background-color: transparent;
+}
+
+.task.empty-list {
+   text-align: center;
+
+   background-color: transparent;
+
+   cursor: default;
+}
+
+.task:not(.empty-list, .drop-zone):hover {
    background-color: var(--light-main);
 }
 

@@ -8,7 +8,7 @@ export const types = {
 
 
 const initialState = {
-   
+   taskModal: false,
 }
 
 

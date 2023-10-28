@@ -14,6 +14,7 @@ import List from '@/components/board/List';
 import NewListButton from '@/components/board/NewListButton';
 import BoardHeader from '@/components/board/BoardHeader';
 import Body from '@/components/ui/Body';
+import TaskModal from '@/components/tasks/TaskModal';
 
 
 
@@ -84,6 +85,8 @@ const Board = () => {
                </ol>
             </Body>
          </div>
+
+         <TaskModal />
       </div>
    );
 }

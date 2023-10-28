@@ -1,0 +1,88 @@
+.task-modal-container {
+   justify-content: flex-end;
+
+   transform: translateX(100%);
+}
+
+.task-modal {
+   width: 40%;
+   height: 100%;
+
+   padding: 2.5rem;
+
+   background-color: var(--main);
+}
+
+.task-modal-header {
+   display: flex;
+   align-items: flex-start;
+   gap: 2rem;
+
+   /* width: 100%; */
+}
+
+.task-modal-header > textarea {
+   flex-grow: 1;
+
+   padding: 0.8rem;
+
+   border: 0.2rem solid transparent;
+   border-radius: 0.5rem;
+
+   background-color: transparent;
+
+   resize: none;
+
+   cursor: pointer;
+
+   transition: border-color 0.2s ease;
+}
+
+.task-modal-header > textarea:not(:focus) {
+   display: -webkit-box;
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;  
+   overflow: hidden;
+}
+
+.task-modal-header > textarea:focus {
+   border-color: var(--info);
+
+   cursor: text;
+}
+
+.task-modal-header > textarea::-webkit-scrollbar {
+   display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.task-modal-header > textarea {
+   -ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;  /* Firefox */
+}
+
+.task-modal-header > button {
+   flex-shrink: 0;
+
+   font-size: 1.8rem;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   width: 3.5rem;
+   height: 3.5rem;
+   padding: 1rem;
+
+   border-radius: 50%;
+
+   background-color: transparent;
+
+   cursor: pointer;
+
+   transition: background-color 0.2s ease;
+}
+
+.task-modal-header > button:hover {
+   background-color: rgba(0, 0, 0, 0.25);
+}

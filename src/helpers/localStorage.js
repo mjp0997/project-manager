@@ -87,6 +87,12 @@ export const projects = {
     *    name?: string,
     *    color?: string,
     * }} data given data to update
+    * @returns {Promise<{
+    *    id: number,
+    *    name: string,
+    *    color: string,
+    *    boards: array
+    * }>}
     */
    updateLocalProject: async (projectId, data) => {
       await awaiter();
@@ -186,6 +192,12 @@ export const boards = {
     *    name?: string,
     *    color?: string,
     * }} data given data to update
+    * @returns {Promise<{
+    *    id: number,
+    *    name: string,
+    *    color: string,
+    *    lists: array
+    * }>}
     */
    updateLocalBoard: async (projectId, boardId, data) => {
       await awaiter();
@@ -280,6 +292,11 @@ export const lists = {
     * @param {{
     *    name?: string,
     * }} data given data to update
+    * @return {Promise<{
+    *    id: number,
+    *    name: string,
+    *    tasks: array
+    * }>}
     */
    updateLocalList: async (projectId, boardId, listId, data) => {
       await awaiter();
@@ -336,9 +353,9 @@ export const tasks = {
     * @param {number} boardId 
     * @param {number} listId
     * @returns {Promise<{
-   *    id: number,
-   *    name: string,
-   * }>}
+    *    id: number,
+    *    name: string,
+    * }>}
    */
    setLocalTask: async (projectId, boardId, listId) => {
       await awaiter();
@@ -383,5 +400,160 @@ export const tasks = {
       localStorage.setItem('projects', JSON.stringify(updatedProjects));
 
       return newTask;
+   },
+
+   /**
+    * Method to update a task given its id from localStorage
+    * @param {number} projectId id of wanted project
+    * @param {number} boardId id of wanted board
+    * @param {number} listId id of wanted list
+    * @param {number} taskId id of wanted task
+    * @param {{
+    *    text?: string,
+    * }} data given data to update
+    * @returns {Promise<{
+    *    id: number,
+    *    text: string
+    * }>}
+    */
+   updateLocalTask: async (projectId, boardId, listId, taskId, data) => {
+      await awaiter();
+
+      const jsonProjects = localStorage.getItem('projects');
+      const projects = JSON.parse(jsonProjects) || [];
+
+      const updatedProjects = projects.map(pr => {
+         if (pr.id === projectId) {
+            return {
+               ...pr,
+               boards: pr.boards.map(board => {
+                  if (board.id === boardId) {
+                     return {
+                        ...board,
+                        lists: board.lists.map(list => {
+                           if (list.id === listId) {
+                              return {
+                                 ...list,
+                                 tasks: list.tasks.map(task => {
+                                    if (task.id === taskId) {
+                                       return {
+                                          ...task,
+                                          ...data
+                                       }
+                                    }
+
+                                    return task;
+                                 })
+                              }
+                           }
+         
+                           return list;
+                        })
+                     }
+                  }
+
+                  return board;
+               })
+            }
+         }
+
+         return pr;
+      });
+
+      localStorage.setItem('projects', JSON.stringify(updatedProjects));
+
+      const project = updatedProjects.find(pr => pr.id === projectId) || [];
+
+      const board = project.boards.find(board => board.id === boardId) || [];
+
+      const list = board.lists.find(list => list.id === listId) || [];
+
+      const task = list.tasks.find(task => task.id === taskId);
+
+      return task;
+   },
+
+   /**
+    * Method to update a task given its id from localStorage
+    * @param {number} projectId id of wanted project
+    * @param {number} boardId id of wanted board
+    * @param {number} currentListId id of parent list
+    * @param {number} targetListId id of target list
+    * @param {number} taskId id of wanted task
+    * @param {number} targetTaskId id of above task
+    * @returns {Promise<{
+    *    id: number,
+    *    text: string
+    * }>}
+    */
+   updatePositionTask: async (projectId, boardId, currentListId, targetListId, taskId, targetTaskId) => {
+      await awaiter();
+
+      const jsonProjects = localStorage.getItem('projects');
+      const projects = JSON.parse(jsonProjects) || [];
+
+      const updatedProjects = projects.map(pr => {
+         if (pr.id === projectId) {
+            return {
+               ...pr,
+               boards: pr.boards.map(board => {
+                  if (board.id === boardId) {
+                     const { lists } = board;
+
+                     let task = null;
+
+                     const listsWithoutTask = lists.map(list => {
+                        if (list.id === currentListId) {
+            
+                           task = list.tasks.find(task => task.id === taskId);
+            
+                           return {
+                              ...list,
+                              tasks: list.tasks.filter(task => task.id !== taskId)
+                           }
+                        }
+            
+                        return list;
+                     });
+            
+                     const listsWithTask = listsWithoutTask.map(list => {
+                        if (list.id === targetListId) {
+            
+                           const targetIndex = list.tasks.findIndex(task => task.id === targetTaskId)
+            
+                           return {
+                              ...list,
+                              tasks: list.tasks.toSpliced(targetIndex + 1, 0, task)
+                           }
+                        }
+            
+                        return list;
+                     });
+
+                     return {
+                        ...board,
+                        lists: listsWithTask
+                     }
+                  }
+
+                  return board;
+               })
+            }
+         }
+
+         return pr;
+      });
+
+      localStorage.setItem('projects', JSON.stringify(updatedProjects));
+
+      const project = updatedProjects.find(pr => pr.id === projectId) || [];
+
+      const board = project.boards.find(board => board.id === boardId) || [];
+
+      const list = board.lists.find(list => list.id === targetListId) || [];
+
+      const task = list.tasks.find(task => task.id === taskId);
+
+      return task;
    },
 }

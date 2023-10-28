@@ -14,6 +14,11 @@ export const updateCurrentBoard = (data) => ({
    payload: data
 });
 
+export const updateCurrentTask = (listId, taskId, data) => ({
+   type: types.UPDATE_CURRENT_TASK,
+   payload: { listId, taskId, data }
+});
+
 export const setListToBoard = (list) => ({
    type: types.SET_LIST_TO_BOARD,
    payload: list
@@ -22,4 +27,31 @@ export const setListToBoard = (list) => ({
 export const setTaskToList = (listId, task) => ({
    type: types.SET_TASK_TO_LIST,
    payload: { listId, newTask: task }
+});
+
+// MODAL
+
+export const setModalTaskId = (listId, taskId) => ({
+   type: types.SET_MODAL_TASK_ID,
+   payload: { listId, taskId }
+});
+
+// DRAG AND DROP RELATED
+
+/**
+ * Set target task of task draggin
+ * @param {{
+ *    listId?: number,
+ *    taskId?: number,
+ * }} data 
+ * @returns 
+ */
+export const setTargetTaskId = (data) => ({
+   type: types.SET_TARGET_TASK_ID,
+   payload: data
+});
+
+export const moveTask = (currentListId, targetListId, taskId, targetTaskId) => ({
+   type: types.MOVE_TASK,
+   payload: { currentListId, taskId, targetListId, targetTaskId }
 });
