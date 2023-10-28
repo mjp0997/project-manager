@@ -1,0 +1,126 @@
+.context-menu-container {
+   position: fixed;
+
+   width: 30rem;
+
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+
+   background-color: var(--light-main);
+
+   border: 0.1rem solid var(--border-color);
+   border-radius: 0.4rem;
+
+   box-shadow: 0 0 0.4rem 0.4rem rgba(0, 0, 0, 0.1);
+
+   z-index: var(--context-index);
+
+   font-size: 1.4rem;
+}
+
+.context-menu-header {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   flex-shrink: 0;
+
+   height: 3rem;
+
+   padding: 0 3rem;
+   margin: 0.5rem;
+
+   position: relative;
+
+   font-weight: 500;
+}
+
+.context-menu-header > button {
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+
+   width: 3rem;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   border-radius: 0.4rem;
+
+   background-color: transparent;
+
+   cursor: pointer;
+
+   transition: background-color 0.2s ease;
+}
+
+.context-menu-header > button:hover {
+   background-color: var(--lighter-main);
+}
+
+.context-menu {
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+
+   overflow-y: auto;
+}
+
+.context-menu::-webkit-scrollbar {
+   width: 1rem;
+   height: 1rem;
+}
+
+/* Track */
+.context-menu::-webkit-scrollbar-track {
+   background: rgba(0, 0, 0, 0.1);
+
+   border-radius: 0.3rem;
+}
+
+/* Handle */
+.context-menu::-webkit-scrollbar-thumb {
+   background: hsla(0, 0%, 100%, 0.3);
+
+   border-radius: 0.3rem;
+}
+
+.context-menu-options {
+   display: flex;
+   flex-direction: column;
+}
+
+.context-menu-option {
+   flex-shrink: 0;
+
+   display: flex;
+   align-items: center;
+
+   padding: 0.7rem 4%;
+
+   cursor: pointer;
+
+   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.context-menu-option:hover {
+   background-color: var(--lighter-main);
+}
+
+.context-menu-option.danger:hover {
+   color: #FFFFFF;
+   background-color: var(--danger);
+}
+
+.context-menu-separator {
+   height: 0.1rem;
+   width: 92%;
+   margin: 0 4%;
+
+   flex-shrink: 0;
+
+   background-color: var(--border-color);
+}

@@ -1,7 +1,7 @@
 .main-container {
    display: flex;
 
-   backdrop-filter: contrast(0.95);
+   background-color: var(--weak-main);
 
    width: 100%;
 

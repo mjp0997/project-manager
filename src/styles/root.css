@@ -1,8 +1,9 @@
 :root {
    /* Colors */
-   --main: #1D2125;
-   --dark-main: #171A1E;
    --darker-main: #101204;
+   --dark-main: #171A1E;
+   --main: #1D2125;
+   --weak-main: #272A2E;
    --light-main: #333C43;
    --lighter-main: #A6C5E229;
    
@@ -13,10 +14,12 @@
 
    --success: #4BCE97;
    --info: #579DFF;
+   --danger: #F87168;
 
    /* Fonts */
    --main-font: 'Rubik', sans-serif;
 
    /* Z index */
    --modal-index: 10;
+   --context-index: 15;
 }

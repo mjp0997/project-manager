@@ -10,7 +10,7 @@ import { setBoardData } from '@/actions/boards';
 
 
 // Components
-import List from '@/components/board/List';
+import List from '@/components/lists/List';
 import NewListButton from '@/components/board/NewListButton';
 import BoardHeader from '@/components/board/BoardHeader';
 import Body from '@/components/ui/Body';

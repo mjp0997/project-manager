@@ -23,7 +23,7 @@
 .list-header {
    flex-shrink: 0;
 
-   padding: 1rem 2rem 1rem 1rem;
+   padding: 1rem;
 
    display: flex;
    align-items: center;
@@ -58,8 +58,31 @@
    border-color: var(--info);
 }
 
-.list-header > svg {
+.list-header > button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
    font-size: 1.4rem;
+
+   width: 3.2rem;
+   height: 3.2rem;
+
+   background-color: transparent;
+
+   border-radius: 0.5rem;
+
+   cursor: pointer;
+
+   transition: background-color 0.2s ease;
+}
+
+.list-header > button:hover {
+   background-color: var(--light-main);
+}
+
+.list-header svg {
+   pointer-events: none;
 }
 
 .list-body {
