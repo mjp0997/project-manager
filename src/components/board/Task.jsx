@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
@@ -9,9 +9,16 @@ import { setModalTaskId, setTargetTaskId } from '@/actions/boards';
 
 
 
+// Components
+import Icon from '@/components/ui/Icon';
+
+
+
 const Task = ({listId, id, text}) => {
 
    const dispatch = useDispatch();
+
+   const { targetTask } = useSelector(state => state.boards);
 
    const handleOpenModal = () => {
       dispatch(setModalTaskId(listId, id));
@@ -26,25 +33,35 @@ const Task = ({listId, id, text}) => {
    const handleDragEnter = (e) => {
       e.preventDefault();
 
-      dispatch(setTargetTaskId({taskId: id}));
+      dispatch(setTargetTaskId({listId: null, taskId: id}));
    }
 
-   const handleDragEnd = () => {
-      dispatch(setTargetTaskId({taskId: null}));
-   }
+   const handleDragEnd = () => dispatch(setTargetTaskId({taskId: null}));
 
    return (
-      <li
-         className='task prevent-selection'
-         onClick={handleOpenModal}
-         draggable
-         onDragStart={handleDragStart}
-         onDragEnter={handleDragEnter}
-         onDragEnd={handleDragEnd}
-         style={{viewTransitionName: `task-${id}`}}
-      >
-         <p>{text}</p>
-      </li>
+      <>
+         <li
+            className='task prevent-selection'
+            onClick={handleOpenModal}
+            draggable
+            onDragStart={handleDragStart}
+            onDragEnter={handleDragEnter}
+            onDragEnd={handleDragEnd}
+            style={{viewTransitionName: `task-${id}`}}
+         >
+            <p>{text}</p>
+         </li>
+
+         {
+            id === targetTask.taskId && (
+               <li
+                  className='task prevent-selection drop-zone'
+               >
+                  <Icon icon='faPlus' />
+               </li>
+            )
+         }
+      </>
    );
 }
 

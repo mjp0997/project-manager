@@ -1,4 +1,3 @@
-import React from 'react';
 import { flushSync } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -32,15 +31,11 @@ const List = ({id, name, tasks}) => {
 
    const { targetTask } = useSelector(state => state.boards);
 
-   const handleDragOver = (e) => {
-      e.preventDefault();
-   }
+   const handleDragOver = (e) => e.preventDefault();
 
    const handleDragEnter = () => dispatch(setTargetTaskId({listId: id, taskId: -1}));
 
-   const handleDragEnd = () => {
-      dispatch(setTargetTaskId({listId: null}));
-   }
+   const handleDragEnd = () => dispatch(setTargetTaskId({listId: null}));
 
    const handleDrop = async (e, isHeader = false) => {
       e.preventDefault();
@@ -55,7 +50,7 @@ const List = ({id, name, tasks}) => {
             dispatch(moveTask(Number(currentListId), id, Number(taskId), resolvedTargetTaskId));
          });
       });
-      
+
       dispatch(setTargetTaskId({listId: null, taskId: null}));
 
       await moveOneTask(Number(projectId), Number(boardId), Number(currentListId), id, Number(taskId), resolvedTargetTaskId);
@@ -86,23 +81,12 @@ const List = ({id, name, tasks}) => {
 
                {
                   tasks.map(task => (
-                     <React.Fragment key={`task-${task.id}`}>
-                        <Task
-                           listId={id}
-                           id={task.id}
-                           text={task.text}
-                        />
-
-                        {
-                           task.id === targetTask.taskId && (
-                              <li
-                                 className='task prevent-selection drop-zone'
-                              >
-                                 <Icon icon='faPlus' />
-                              </li>
-                           )
-                        }
-                     </React.Fragment>
+                     <Task
+                        key={`task-${task.id}`}
+                        listId={id}
+                        id={task.id}
+                        text={task.text}
+                     />
                   ))
                }
 
