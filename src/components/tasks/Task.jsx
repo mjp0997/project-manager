@@ -5,12 +5,7 @@ import PropTypes from 'prop-types';
 
 // Actions
 import { handleModal } from '@/actions/ui';
-import { setModalTaskId, setTargetTaskId } from '@/actions/boards';
-
-
-
-// Components
-import Icon from '@/components/ui/Icon';
+import { dragTypes, setDragType, setModalTaskId, setTargetTaskId } from '@/actions/boards';
 
 
 
@@ -18,7 +13,7 @@ const Task = ({listId, id, text}) => {
 
    const dispatch = useDispatch();
 
-   const { targetTask } = useSelector(state => state.boards);
+   const { dragType } = useSelector(state => state.boards);
 
    const handleOpenModal = () => {
       dispatch(setModalTaskId(listId, id));
@@ -26,42 +21,45 @@ const Task = ({listId, id, text}) => {
    }
 
    const handleDragStart = (e) => {
+      e.stopPropagation();
+
+      dispatch(setDragType(dragTypes.task));
+
       e.dataTransfer.setData('taskId', id);
       e.dataTransfer.setData('listId', listId);
    }
 
    const handleDragEnter = (e) => {
+      e.stopPropagation();
       e.preventDefault();
+
+      if (dragType !== dragTypes.task) return;
 
       dispatch(setTargetTaskId({listId: null, taskId: id}));
    }
 
-   const handleDragEnd = () => dispatch(setTargetTaskId({taskId: null}));
+   const handleDragEnd = (e) => {
+      e.stopPropagation();
+      
+      if (dragType !== dragTypes.task) return;
+
+      dispatch(setTargetTaskId({taskId: null}));
+
+      dispatch(setDragType(null));
+   }
 
    return (
-      <>
-         <li
-            className='task prevent-selection'
-            onClick={handleOpenModal}
-            draggable
-            onDragStart={handleDragStart}
-            onDragEnter={handleDragEnter}
-            onDragEnd={handleDragEnd}
-            style={{viewTransitionName: `task-${id}`}}
-         >
-            <p>{text}</p>
-         </li>
-
-         {
-            id === targetTask.taskId && (
-               <li
-                  className='task prevent-selection drop-zone'
-               >
-                  <Icon icon='faPlus' />
-               </li>
-            )
-         }
-      </>
+      <li
+         className='task prevent-selection'
+         onClick={handleOpenModal}
+         draggable
+         onDragStart={handleDragStart}
+         onDragEnter={handleDragEnter}
+         onDragEnd={handleDragEnd}
+         style={{viewTransitionName: `task-${id}`}}
+      >
+         <p>{text}</p>
+      </li>
    );
 }
 

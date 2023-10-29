@@ -58,6 +58,10 @@
    border-color: var(--info);
 }
 
+.list.being-dragged .list-header > input {
+   pointer-events: none;
+}
+
 .list-header > button {
    display: flex;
    justify-content: center;

@@ -2,6 +2,14 @@ import { types } from '@/reducers/boardsReducer';
 
 
 
+// Types
+export const dragTypes = {
+   list: 'list',
+   task: 'task'
+}
+
+
+
 // Actions
 
 export const setBoardData = (board) => ({
@@ -37,6 +45,29 @@ export const setModalTaskId = (listId, taskId) => ({
 });
 
 // DRAG AND DROP RELATED
+
+export const setDragType = (type) => ({
+   type: types.SET_DRAG_ELEMENT_TYPE,
+   payload: type
+});
+
+/**
+ * Set target task of task draggin
+ * @param {{
+ *    listId?: number,
+ *    taskId?: number,
+ * }} data 
+ * @returns 
+ */
+export const setGrabbedListData = (data) => ({
+   type: types.SET_GRABBED_LIST_DATA,
+   payload: data
+});
+
+export const moveList = (listId, targetListId) => ({
+   type: types.MOVE_LIST,
+   payload: { listId, targetListId }
+});
 
 /**
  * Set target task of task draggin

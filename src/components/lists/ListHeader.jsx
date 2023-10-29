@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+
+
+
+// Actions
+import { setContextPosition } from '@/actions/ui';
 
 
 
@@ -10,10 +16,13 @@ import ListContextMenu from '@/components/lists/ListContextMenu';
 
 
 
+// Custom hooks
+import { useTaskDropzone } from '@/hooks/useTaskDropzone';
+
+
+
 // Services
 import { updateList } from '@/services/lists';
-import { useDispatch } from 'react-redux';
-import { setContextPosition } from '@/actions/ui';
 
 
 
@@ -27,6 +36,8 @@ const ListHeader = ({id, name}) => {
    
    const [listTitle, setListTitle] = useState(name);
    const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+   const { handleDragOver, handleDragEnter, handleDragEnd, handleDrop } = useTaskDropzone(Number(projectId), Number(boardId), id);
 
    useEffect(() => {
       const updateTimeout = setTimeout(() => {
@@ -63,22 +74,30 @@ const ListHeader = ({id, name}) => {
 
    return (
       <>
-         <div className='list-header'>
-            <input
-               type='text'
-               name={`list-${id}-name`}
-               value={listTitle}
-               onChange={handleChangeTitle}
-            />
-            
-            <button
-               type='button'
-               onClick={handleOpenMenu}
-               ref={menuButtonRef}
-            >
-               <Icon icon='faEllipsis' />
-            </button>
+         <div
+            onDragOver={handleDragOver}
+            onDragEnter={handleDragEnter}
+            onDrop={(e) => handleDrop(e, true)}
+            onDragEnd={handleDragEnd}
+         >
+            <div className='list-header'>
+               <input
+                  type='text'
+                  name={`list-${id}-name`}
+                  value={listTitle}
+                  onChange={handleChangeTitle}
+               />
+               
+               <button
+                  type='button'
+                  onClick={handleOpenMenu}
+                  ref={menuButtonRef}
+               >
+                  <Icon icon='faEllipsis' />
+               </button>
+            </div>
          </div>
+         
 
          <ListContextMenu isOpen={menuIsOpen} handleClose={handleCloseMenu} />
       </>

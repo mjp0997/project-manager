@@ -12,6 +12,13 @@ export const types = {
    SET_MODAL_TASK_ID: '[BOARDS] SET MODAL TASK ID',
 
    // Drag and drop functionality related
+   SET_DRAG_ELEMENT_TYPE: '[BOARDS] SET ELEMENT TYPE BEING DRAGGED',
+
+   // Lists
+   SET_GRABBED_LIST_DATA: '[BOARDS] SET TARGET LIST ID',
+   MOVE_LIST: '[BOARDS] MOVE LIST POSITION',
+
+   // Tasks
    SET_TARGET_TASK_ID: '[BOARDS] SET TARGET TASK ID',
    MOVE_TASK: '[BOARDS] MOVE TASK POSITION',
 }
@@ -26,7 +33,12 @@ const initialState = {
       taskId: null,
    },
 
-   targetTaskId: null,
+   dragType: null,
+
+   grabbedList: {
+      listId: null,
+      targetListId: null,
+   },
 
    targetTask: {
       listId: null,
@@ -130,6 +142,23 @@ export const boardsReducer = (state = initialState, action) => {
          }
       }
 
+      case types.SET_DRAG_ELEMENT_TYPE: {
+         return {
+            ...state,
+            dragType: action.payload
+         }
+      }
+
+      case types.SET_GRABBED_LIST_DATA: {
+         return {
+            ...state,
+            grabbedList: {
+               ...state.grabbedList,
+               ...action.payload
+            }
+         }
+      }
+
       case types.SET_TARGET_TASK_ID: {
          return {
             ...state,
@@ -181,6 +210,31 @@ export const boardsReducer = (state = initialState, action) => {
             board: {
                ...state.board,
                lists: listsWithTask
+            }
+         }
+      }
+
+      case types.MOVE_LIST: {
+
+         const { listId, targetListId } = action.payload;
+
+         console.log(listId, targetListId);
+
+         const { lists } = state.board;
+
+         const toMoveList = lists.find(list => list.id === listId);
+
+         const listsWithoutList = lists.filter(list => list.id !== listId);
+
+         const targetIndex = lists.findIndex(list => list.id === targetListId);
+
+         const updatedLists = listsWithoutList.toSpliced(targetIndex, 0, toMoveList);
+
+         return {
+            ...state,
+            board: {
+               ...state.board,
+               lists: updatedLists
             }
          }
       }

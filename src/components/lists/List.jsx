@@ -1,25 +1,17 @@
-import { flushSync } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 
 
-// ACtions
-import { moveTask, setTargetTaskId } from '@/actions/boards';
+// Actions
+import { dragTypes, moveList, setDragType, setGrabbedListData } from '@/actions/boards';
 
 
 
 // Components
 import NewTaskButton from '@/components/lists/NewTaskButton';
 import ListHeader from '@/components/lists/ListHeader';
-import Task from '@/components/tasks/Task';
-import Icon from '@/components/ui/Icon';
-
-
-
-// Services
-import { moveOneTask } from '@/services/tasks';
+import ListBody from '@/components/lists/ListBody';
 
 
 
@@ -27,87 +19,47 @@ const List = ({id, name, tasks}) => {
 
    const dispatch = useDispatch();
 
-   const { projectId, boardId } = useParams();
+   const { dragType, grabbedList } = useSelector(state => state.boards);
 
-   const { targetTask } = useSelector(state => state.boards);
+   const handleDragStart = () => {
+      dispatch(setDragType(dragTypes.list));
+      
+      dispatch(setGrabbedListData({ listId: id }));
+   }
 
-   const handleDragOver = (e) => e.preventDefault();
+   const handleDragEnter = () => {
+      if (dragType !== dragTypes.list) return;
+      
+      dispatch(setGrabbedListData({ targetListId: id }));
+   }
 
-   const handleDragEnter = () => dispatch(setTargetTaskId({listId: id, taskId: -1}));
+   const handleDragEnd = () => {
+      dispatch(moveList(grabbedList.listId, grabbedList.targetListId))
 
-   const handleDragEnd = () => dispatch(setTargetTaskId({listId: null}));
+      dispatch(setGrabbedListData({ listId: null, targetListId: null }));
 
-   const handleDrop = async (e, isHeader = false) => {
-      e.preventDefault();
-
-      const currentListId = e.dataTransfer.getData('listId');
-      const taskId = e.dataTransfer.getData('taskId');
-
-      const resolvedTargetTaskId = !isHeader ? targetTask.taskId : -1;
-
-      document.startViewTransition(() => {
-         flushSync(() => {
-            dispatch(moveTask(Number(currentListId), id, Number(taskId), resolvedTargetTaskId));
-         });
-      });
-
-      dispatch(setTargetTaskId({listId: null, taskId: null}));
-
-      await moveOneTask(Number(projectId), Number(boardId), Number(currentListId), id, Number(taskId), resolvedTargetTaskId);
+      dispatch(setDragType(null));
    }
 
    return (
-      <>
-         <li className='list'>
-            <div
-               onDragOver={handleDragOver}
-               onDragEnter={handleDragEnter}
-               onDrop={(e) => handleDrop(e, true)}
-               onDragEnd={handleDragEnd}
-            >
-               <ListHeader id={id} name={name} />
-            </div>
+      <li
+         className='list'
+         draggable
+         onDragStart={handleDragStart}
+         onDragEnter={handleDragEnter}
+         onDragEnd={handleDragEnd}
+      >
+         <ListHeader id={id} name={name} />
 
-            <div className='list-body'>
-               <ol className='list-content' onDragOver={handleDragOver} onDrop={handleDrop}>
-                  {
-                     (targetTask.listId === id && targetTask.taskId === -1) && (
-                        <li
-                           className='task prevent-selection drop-zone'
-                        >
-                           <Icon icon='faPlus' />
-                        </li>
-                     )
-                  }
+         <ListBody
+            listId={id}
+            tasks={tasks}
+         />
 
-                  {
-                     tasks.map(task => (
-                        <Task
-                           key={`task-${task.id}`}
-                           listId={id}
-                           id={task.id}
-                           text={task.text}
-                        />
-                     ))
-                  }
-
-                  {
-                     (tasks.length === 0 && targetTask.listId !== id) && (
-                        <li
-                           className='task prevent-selection empty-list'
-                        >
-                           <p>Empty list...</p>
-                        </li>
-                     )
-                  }
-               </ol>
-            </div>
-
-            <div className='list-footer'>
-               <NewTaskButton listId={id} />
-            </div>
-         </li>
-      </>
+         <div className='list-footer'>
+            <NewTaskButton listId={id} />
+         </div>
+      </li>
    );
 }
 
