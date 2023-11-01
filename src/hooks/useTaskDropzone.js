@@ -18,12 +18,12 @@ import { moveOneTask } from '@/services/tasks';
  * Custom hook to separate tasks drag and drop functionality from List component
  * @param {number} projectId id of lists related project
  * @param {number} boardId id of lists related project
- * @param {number} listId if of target list
+ * @param {number} listId id of target list
  * @returns {{
  *    handleDragOver: (e: DragEvent) => void,
  *    handleDragEnter: () => void,
  *    handleDragEnd: () => void,
- *    handleDrop: (e: Event, isHeader: bool) => void
+ *    handleDrop: (e: Event, isHeader: boolean) => void
  * }}
  */
 export const useTaskDropzone = (projectId, boardId, listId) => {
