@@ -69,25 +69,6 @@
    overflow-y: auto;
 }
 
-.context-menu::-webkit-scrollbar {
-   width: 1rem;
-   height: 1rem;
-}
-
-/* Track */
-.context-menu::-webkit-scrollbar-track {
-   background: rgba(0, 0, 0, 0.1);
-
-   border-radius: 0.3rem;
-}
-
-/* Handle */
-.context-menu::-webkit-scrollbar-thumb {
-   background: hsla(0, 0%, 100%, 0.3);
-
-   border-radius: 0.3rem;
-}
-
 .context-menu-options {
    display: flex;
    flex-direction: column;

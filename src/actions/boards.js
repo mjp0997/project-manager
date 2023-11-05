@@ -39,10 +39,24 @@ export const setTaskToList = (listId, task) => ({
 
 // MODAL
 
-export const setModalTaskId = (listId, taskId) => ({
-   type: types.SET_MODAL_TASK_ID,
-   payload: { listId, taskId }
+export const setModalTask = (listId, task) => ({
+   type: types.SET_MODAL_TASK,
+   payload: { listId, task }
 });
+
+export const startSetModalTask = (listId, taskId) => {
+   return async (dispatch, getState) => {
+      dispatch(setModalTask(null, null));
+
+      const { board } = getState().boards;
+
+      const list = board?.lists?.find(list => list.id === listId) || [];
+
+      const task = list?.tasks?.find(task => task.id === taskId);
+
+      dispatch(setModalTask(listId, task));
+   }
+}
 
 // DRAG AND DROP RELATED
 

@@ -9,7 +9,7 @@ export const types = {
    SET_TASK_TO_LIST: '[BOARDS] ADD TASK TO GIVEN LIST',
 
    // Modal data
-   SET_MODAL_TASK_ID: '[BOARDS] SET MODAL TASK ID',
+   SET_MODAL_TASK: '[BOARDS] SET MODAL TASK ID',
 
    // Drag and drop functionality related
    SET_DRAG_ELEMENT_TYPE: '[BOARDS] SET ELEMENT TYPE BEING DRAGGED',
@@ -30,7 +30,7 @@ const initialState = {
 
    openTask: {
       listId: null,
-      taskId: null,
+      task: null,
    },
 
    dragType: null,
@@ -70,16 +70,18 @@ export const boardsReducer = (state = initialState, action) => {
       case types.UPDATE_CURRENT_TASK: {
          const { listId, taskId, data } = action.payload;
 
-         const lists = state.board.lists.map(list => {
+         const newOpenTask = {
+            ...state.openTask.task,
+            ...data
+         }
+
+         const updatedLists = state.board.lists.map(list => {
             if (list.id === listId) {
                return {
                   ...list,
                   tasks: list.tasks.map(task => {
                      if (task.id === taskId) {
-                        return {
-                           ...task,
-                           ...data
-                        }
+                        return newOpenTask;
                      }
 
                      return task;
@@ -94,7 +96,14 @@ export const boardsReducer = (state = initialState, action) => {
             ...state,
             board: {
                ...state.board,
-               lists: lists
+               lists: updatedLists
+            },
+            openTask: {
+               ...state.openTask,
+               task: {
+                  ...state.openTask.task,
+                  ...data
+               }
             }
          }
       }
@@ -130,14 +139,14 @@ export const boardsReducer = (state = initialState, action) => {
          }
       }
 
-      case types.SET_MODAL_TASK_ID: {
-         const { listId, taskId } = action.payload;
+      case types.SET_MODAL_TASK: {
+         const { listId, task } = action.payload;
 
          return {
             ...state,
             openTask: {
                listId,
-               taskId,
+               task,
             }
          }
       }

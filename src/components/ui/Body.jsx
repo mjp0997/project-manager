@@ -6,10 +6,8 @@ const Body = ({children}) => {
 
    return (
       <div className='main-container'>
-         <div className='main'>
-            {/* <div className='main-content'> */}
-               {children}
-            {/* </div> */}
+         <div className='main custom-scrollbar'>
+            {children}
          </div>
       </div>
    );

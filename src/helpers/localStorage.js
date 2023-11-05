@@ -354,7 +354,8 @@ export const tasks = {
     * @param {number} listId
     * @returns {Promise<{
     *    id: number,
-    *    name: string,
+    *    text: string,
+    *    description: string,
     * }>}
    */
    setLocalTask: async (projectId, boardId, listId) => {
@@ -366,6 +367,7 @@ export const tasks = {
       const newTask = {
          id: new Date().getTime(),
          text: 'My task',
+         description: '',
       }
 
       const updatedProjects = projects.map(pr => {
@@ -410,10 +412,12 @@ export const tasks = {
     * @param {number} taskId id of wanted task
     * @param {{
     *    text?: string,
+    *    description?: string,
     * }} data given data to update
     * @returns {Promise<{
     *    id: number,
-    *    text: string
+    *    text: string,
+    *    description: string,
     * }>}
     */
    updateLocalTask: async (projectId, boardId, listId, taskId, data) => {
@@ -483,7 +487,8 @@ export const tasks = {
     * @param {number} targetTaskId id of above task
     * @returns {Promise<{
     *    id: number,
-    *    text: string
+    *    text: string,
+    *    description: string,
     * }>}
     */
    updatePositionTask: async (projectId, boardId, currentListId, targetListId, taskId, targetTaskId) => {

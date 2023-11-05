@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 
 
@@ -21,7 +20,7 @@ import { updateTask } from '@/services/tasks';
 
 
 
-const TaskModalHeader = ({text}) => {
+const TaskModalHeader = () => {
 
    const dispatch = useDispatch();
 
@@ -36,22 +35,22 @@ const TaskModalHeader = ({text}) => {
    useEffect(() => {
       const updateTimeout = setTimeout(() => {
          if (!firstExecution) {
-            handleUpdateText(Number(projectId), Number(boardId), openTask?.listId, openTask?.taskId, text);
+            handleUpdateText(Number(projectId), Number(boardId), openTask?.listId, openTask?.task?.id, openTask.task?.text);
          }
       }, 500);
 
       return () => clearTimeout(updateTimeout);
-   }, [projectId, boardId, openTask?.listId, openTask?.taskId, text, firstExecution]);
+   }, [projectId, boardId, openTask?.listId, openTask?.task?.id, openTask.task?.text, firstExecution]);
   
    useEffect(() => {
       taskNameRef.current.style.height = 'auto';
       taskNameRef.current.style.height = taskNameRef.current.scrollHeight + 'px';
-   }, [text]);
+   }, [openTask.task?.text]);
 
    const handleCloseModal = () => dispatch(handleModal('task', false));
 
    const handleTaskName = (e) => {
-      dispatch(updateCurrentTask(openTask.listId, openTask.taskId, { text: e.target.value }));
+      dispatch(updateCurrentTask(openTask.listId, openTask.task?.id, { text: e.target.value }));
       setFirstExecution(false);
    }
 
@@ -64,7 +63,7 @@ const TaskModalHeader = ({text}) => {
          <textarea
             name='task-name'
             rows={1}
-            value={text}
+            value={openTask.task?.text}
             onChange={handleTaskName}
             ref={taskNameRef}
          />
@@ -77,12 +76,6 @@ const TaskModalHeader = ({text}) => {
          </button>
       </div>
    );
-}
-
-
-
-TaskModalHeader.propTypes = {
-   text: PropTypes.string.isRequired,
 }
 
 

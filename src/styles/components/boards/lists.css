@@ -102,25 +102,6 @@
    overflow: auto;
 }
 
-.list-body::-webkit-scrollbar {
-   width: 0.7rem;
-   height: 0.7rem;
-}
-
-/* Track */
-.list-body::-webkit-scrollbar-track {
-   background: rgba(0, 0, 0, 0.1);
-
-   border-radius: 0.3rem;
-}
-
-/* Handle */
-.list-body::-webkit-scrollbar-thumb {
-   background: var(--lighter-main);
-
-   border-radius: 0.3rem;
-}
-
 .list-content {
    display: flex;
    flex-direction: column;

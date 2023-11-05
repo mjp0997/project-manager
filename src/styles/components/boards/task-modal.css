@@ -5,10 +5,14 @@
 }
 
 .task-modal {
-   width: 40%;
+   width: 70rem;
    height: 100%;
 
    padding: 2.5rem;
+
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
 
    background-color: var(--main);
 }
@@ -22,6 +26,8 @@
 }
 
 .task-modal-header > textarea {
+   font-weight: 700;
+
    flex-grow: 1;
 
    padding: 0.8rem;
@@ -85,4 +91,184 @@
 
 .task-modal-header > button:hover {
    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.task-modal-body {
+   display: grid;
+   grid-template-columns: auto 17rem;
+   gap: 1rem;
+
+   flex-grow: 1;
+
+   height: 100%;
+
+   overflow-y: auto;
+}
+
+.task-modal-sidebar {
+   display: flex;
+   flex-direction: column;
+   row-gap: 3rem;
+}
+
+.task-modal-sidebar-group {
+   display: flex;
+   flex-direction: column;
+   row-gap: 1rem;
+}
+
+.task-modal-sidebar-group > h4 {
+   font-size: 1.4rem;
+   font-weight: 500;
+}
+
+.task-modal-sidebar-element {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+
+   padding: 0.5rem 0.8rem;
+
+   border-radius: 0.3rem;
+
+   font-size: 1.4rem;
+   font-weight: 500;
+
+   background-color: var(--light-main);
+
+   cursor: pointer;
+
+   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.task-modal-sidebar-element:hover {
+   background-color: var(--soft-main);
+}
+
+.task-modal-sidebar-element.danger:hover {
+   color: #FFFFFF;
+   background-color: var(--danger);
+}
+
+.task-modal-sidebar-element > div {
+   width: 2rem;
+   height: 2rem;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.task-modal-sidebar-element > div > svg {
+   font-size: 1.4rem;
+}
+
+.task-modal-sidebar-element > p {
+   line-height: 1.9rem;
+}
+
+.task-modal-content {
+   display: flex;
+   flex-direction: column;
+   gap: 2.5rem;
+
+   overflow-y: auto;
+
+   padding-right: 0.5rem;
+   margin-right: 0.5rem;
+}
+
+.task-modal-section {
+   display: flex;
+   flex-direction: column;
+
+   margin-left: 4rem;
+}
+
+.task-modal-section-title {
+   display: flex;
+   align-items: center;
+
+   position: relative;
+}
+
+.task-modal-section-title > p {
+   font-size: 1.6rem;
+   font-weight: 600;
+   line-height: 2rem;
+}
+
+.task-modal-section-offset {
+   position: absolute;
+   top: 0;
+   left: -4rem;
+
+   width: 3rem;
+   height: 100%;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.task-modal-section-offset > svg {
+   font-size: 1.8rem;
+}
+
+.task-modal-section-actions {
+   margin-left: auto;
+
+   display: flex;
+   gap: 1rem;
+}
+
+.task-modal-section-action {
+   background-color: var(--light-main);
+
+   padding: 0.5rem 1rem;
+
+   border-radius: 0.3rem;
+
+   cursor: pointer;
+
+   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.task-modal-section-action:hover {
+   background-color: var(--soft-main);
+}
+
+.task-modal-section-action.danger:hover {
+   color: #FFFFFF;
+   background-color: var(--danger);
+}
+
+.task-modal-section-body {
+   display: flex;
+
+   width: 100%;
+
+   margin-top: 1.5rem;
+}
+
+.task-modal-section-body > textarea {
+   width: 100%;
+
+   padding: 0.8rem 1.2rem;
+
+   border-radius: 0.3rem;
+
+   background-color: var(--light-main);
+   
+   resize: none;
+
+   transition: background-color 0.2s ease;
+}
+
+.task-modal-section-body > textarea::placeholder {
+   color: var(--light-secondary);
+}
+
+.task-modal-section-body > textarea:focus {
+   background-color: var(--soft-main);
 }

@@ -25,7 +25,7 @@ const ListBody = ({listId, tasks}) => {
    const { handleDragOver, handleDrop } = useTaskDropzone(Number(projectId), Number(boardId), listId);
 
    return (
-      <div className='list-body'>
+      <div className='list-body custom-scrollbar'>
          <ol className='list-content' onDragOver={handleDragOver} onDrop={handleDrop}>
             {
                (targetTask.listId === listId && targetTask.taskId === -1) && (

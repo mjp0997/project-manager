@@ -9,7 +9,8 @@ import { tasks } from '@/helpers/localStorage';
  * @param {number} listId id of parent list
  * @returns {Promise<{
  *    id: number,
- *    text: string
+ *    text: string,
+ *    description: string,
  * }>} task
  */
 export const create = async (projectId, boardId, listId) => {

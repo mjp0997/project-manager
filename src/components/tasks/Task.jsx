@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 // Actions
 import { handleModal } from '@/actions/ui';
-import { dragTypes, setDragType, setModalTaskId, setTargetTaskId } from '@/actions/boards';
+import { dragTypes, setDragType, setTargetTaskId, startSetModalTask } from '@/actions/boards';
 
 
 
@@ -16,7 +16,7 @@ const Task = ({listId, id, text}) => {
    const { dragType } = useSelector(state => state.boards);
 
    const handleOpenModal = () => {
-      dispatch(setModalTaskId(listId, id));
+      dispatch(startSetModalTask(listId, id));
       dispatch(handleModal('task', true));
    }
 

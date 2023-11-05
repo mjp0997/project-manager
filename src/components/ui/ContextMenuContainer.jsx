@@ -42,12 +42,13 @@ const ContextMenuContainer = ({children, isOpen, handleClose, title}) => {
 
             <button
                type='button'
+               onClick={handleClose}
             >
                <Icon icon='faXmark' />
             </button>
          </div>
          
-         <div className='context-menu'>
+         <div className='context-menu custom-scrollbar'>
             {children}
          </div>
       </div>
